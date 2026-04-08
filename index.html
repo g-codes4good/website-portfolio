@@ -1090,7 +1090,14 @@
         /* MINIMIZED DESKTOP (769px - 1024px) - Keep desktop behaviors */
         @media (min-width: 769px) and (max-width: 1024px) {
             .scroll-indicator {
-                display: block !important;
+                display: none !important;
+            }
+        }
+
+        /* FULL DESKTOP (>1024px) */
+        @media (min-width: 1025px) {
+            .scroll-indicator {
+                display: flex !important;
             }
         }
 
