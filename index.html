@@ -261,7 +261,7 @@
         }
 
         .hero-section {
-            min-height: 100vh;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -1084,6 +1084,13 @@
                 height: 140px;
             }
 
+        }
+
+        /* FULL DESKTOP (>1024px) */
+        @media (min-width: 1025px) {
+            .hero-section {
+                min-height: 100vh;
+            }
         }
 
         /* MINIMIZED DESKTOP (769px - 1024px) - Keep desktop behaviors */
