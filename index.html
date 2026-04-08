@@ -1086,6 +1086,14 @@
 
         }
 
+        /* MINIMIZED DESKTOP (769px - 1024px) - Keep desktop behaviors */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .scroll-indicator {
+                display: block !important;
+            }
+        }
+
+        /* MOBILE ONLY (max-width: 768px) - Mobile-specific behaviors */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
