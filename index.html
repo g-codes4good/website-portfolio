@@ -962,10 +962,17 @@
             height: 40px;
             border-radius: 50%;
             background: var(--color-gradient);
-            background-image: url('profilephoto.jpg');
+            background-image: url('embedded-files/profilephoto.jpg');
             background-size: cover;
             background-position: center;
             flex-shrink: 0;
+            cursor: pointer;
+            transition: var(--transition-base);
+        }
+
+        .mobile-profile-image:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
         }
 
         .mobile-menu-toggle {
@@ -1248,7 +1255,7 @@
     <!-- MOBILE HEADER (visible only on mobile) -->
     <header class="mobile-header">
         <div class="mobile-header-title">
-            <div class="mobile-profile-image" role="img" aria-label="Greta Li"></div>
+            <div class="mobile-profile-image" onclick="switchSection('home')" role="button" tabindex="0" aria-label="Greta Li - Click to go home"></div>
             <h2>Greta Li</h2>
             <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1495,6 +1502,11 @@
             link.addEventListener('click', () => {
                 mobileNav.classList.remove('open');
             });
+        });
+
+        // Close menu when clicking profile image
+        document.querySelector('.mobile-profile-image').addEventListener('click', () => {
+            mobileNav.classList.remove('open');
         });
 
         // Close menu when clicking outside
