@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greta Li — Following the data to find the story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafaf8;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* HEADER */
+        header {
+            background: white;
+            padding: 5rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #d4a574 50%, transparent 100%);
+            opacity: 0.3;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            position: relative;
+            z-index: 1;
+            line-height: 1.1;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: #8b6f47;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro {
+            max-width: 750px;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: 2px solid #d4a574;
+            background: white;
+            color: #d4a574;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Syne', sans-serif;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #d4a574;
+            transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* SECTIONS */
+        section {
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .work {
+            max-width: 1100px;
+        }
+
+        .other-section {
+            max-width: 900px;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3.5rem;
+            color: #1a1a1a;
+            position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.2;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #d4a574 0%, #c9945a 50%, rgba(212, 165, 116, 0.3) 100%);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .work-intro {
+            color: #666;
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        /* NONPROFIT CARDS */
+        .nonprofit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0 4rem 0;
+        }
+
+        .nonprofit-card {
+            background: white;
+            padding: 2.25rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+        }
+
+        .nonprofit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #d4a574 0%, transparent 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nonprofit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(212, 165, 116, 0.12);
+            border-color: #e8dcc8;
+        }
+
+        .nonprofit-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nonprofit-card h4 {
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+        }
+
+        .nonprofit-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .nonprofit-card p:first-of-type {
+            color: #8b6f47;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #f8f4ef;
+            color: #8b6f47;
+            padding: 0.4rem 0.9rem;
+            margin-right: 0.6rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: 'IBM Plex Mono', monospace;
+            border: 1px solid #ebe4d6;
+            transition: all 0.3s;
+        }
+
+        .badge:hover {
+            background: #f0e8dd;
+            border-color: #d4a574;
+        }
+
+        /* WORK ITEMS */
+        .work-item {
+            background: white;
+            padding: 2.5rem;
+            margin-bottom: 3.5rem;
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .work-item:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .work-item h3 {
+            margin-top: 0;
+        }
+
+        .work-item p {
+            color: #666;
+            margin-bottom: 1.25rem;
+            line-height: 1.75;
+        }
+
+        .publication-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .publication-list li {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            padding-left: 1.75rem;
+            transition: all 0.3s;
+        }
+
+        .publication-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #d4a574;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .publication-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .publication-list li a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .publication-list li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4a574;
+            transition: width 0.3s;
+        }
+
+        .publication-list li a:hover {
+            color: #d4a574;
+        }
+
+        .publication-list li a:hover::after {
+            width: 100%;
+        }
+
+        /* EXPERIENCE */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .experience-item {
+            background: linear-gradient(135deg, #faf8f5 0%, white 100%);
+            padding: 2.25rem;
+            border-left: 4px solid #d4a574;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            border: 1px solid #f0f0f0;
+            border-left: 4px solid #d4a574;
+        }
+
+        .experience-item:hover {
+            transform: translateX(6px);
+            box-shadow: 0 8px 16px rgba(212, 165, 116, 0.1);
+        }
+
+        .experience-item h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-item p {
+            color: #666;
+            line-height: 1.75;
+            font-size: 0.95rem;
+        }
+
+        #about {
+            max-width: 900px;
+        }
+
+        #about p {
+            color: #666;
+            line-height: 1.85;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            margin-top: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #d4a574 50%, transparent 100%);
+            opacity: 0.3;
+        }
+
+        footer h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: #d4a574;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .contact-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4a574;
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .contact-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-links a:hover::after {
+            width: 100%;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .nonprofit-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            header {
+                padding: 3rem 1.5rem 2.5rem;
+            }
+
+            section {
+                padding: 0 1.5rem;
+            }
+
+            .contact-links {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Greta Li</h1>
+        <p class="tagline">Following the data to find the story.</p>
+        <div class="intro">
+            <p>I work with data to understand systems—how they function, where they fail, who gets hurt. Five years examining financial institutions for regulatory violations. Two years building operations and communications for nonprofits. Now exploring AI governance and what it means to evaluate systems when outcomes are unclear.</p>
+            <p style="margin-top: 1.5rem; color: #999; font-style: italic; font-size: 0.9rem;">[PLACEHOLDER: Add 2-3 sentence narrative explaining why you moved across these domains and what you learned. The connecting thread that shows intentional career progression, not random moves.]</p>
+        </div>
+        <div class="cta-buttons">
+            <a href="#work" class="btn">See my work</a>
+            <a href="#contact" class="btn">Get in touch</a>
+        </div>
+    </header>
+
+    <section id="work" class="work">
+        <h2>Work</h2>
+
+        <h3>Nonprofit Impact & Communications</h3>
+        <p class="work-intro">I translate organizational data and field stories into reports that inform strategy and funding.</p>
+
+        <div class="nonprofit-grid">
+            <div class="nonprofit-card">
+                <h4>Annual Reports</h4>
+                <p><strong>ALDN, 2024 & 2025</strong></p>
+                <p>Created 30-40 page reports combining field program data, donor insights, and visual narratives. Used by the organization to communicate impact and inform the following year's funding decisions.</p>
+                <p style="margin-top: 1rem; color: #999; font-size: 0.85rem; font-style: italic;">[PLACEHOLDER: Quantified outcome — e.g., "Led to 15% increase in donor commitments" or "Shared with 200+ stakeholders, informing 2026 strategy"]</p>
+                <div style="margin-top: 1.5rem;">
+                    <span class="badge">Data + narrative</span>
+                    <span class="badge">Design</span>
+                </div>
+            </div>
+
+            <div class="nonprofit-card">
+                <h4>Campaign Toolkit & Communications</h4>
+                <p><strong>$200K Capital Campaign, 2025</strong></p>
+                <p>Created ambassador toolkit and executed weekly communications to 1,500+ subscribers across a multi-month fundraising campaign.</p>
+                <div style="margin-top: 1.5rem;">
+                    <span class="badge">Campaign</span>
+                    <span class="badge">Communications</span>
+                </div>
+            </div>
+
+            <div class="nonprofit-card">
+                <h4>Design Thinking Workshops</h4>
+                <p><strong>Indigitous, 2025</strong></p>
+                <p>Facilitated 5 on-site workshops for churches, reaching 120+ people. Helped groups move from identifying a problem to sketching solutions.</p>
+                <p style="margin-top: 1rem; color: #999; font-size: 0.85rem; font-style: italic;">[PLACEHOLDER: Concrete outcome — e.g., "X workshops led to Y communities implementing solutions" or "Participants completed post-workshop survey showing Z% felt equipped to address their problem"]</p>
+                <div style="margin-top: 1.5rem;">
+                    <span class="badge">Facilitation</span>
+                    <span class="badge">Design thinking</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="work-item">
+            <h3>Government Research</h3>
+            <p>Five years at CFPB. Participated in fair lending examinations and co-authored research on consumer financial behavior and regulatory data quality.</p>
+            <p style="color: #999; font-size: 0.85rem; font-style: italic;">[PLACEHOLDER: Add technical depth + influence — e.g., "Analyzed 15M+ mortgage records using logistic regression. Identified 3 high-risk areas that legal team prioritized for field examination, directly influencing regulatory action affecting X institutions."]</p>
+
+            <p><strong>Selected publications:</strong></p>
+            <ul class="publication-list">
+                <li>
+                    <a href="https://www.consumerfinance.gov/data-research/research-reports/" target="_blank">Characteristics of Mortgage Borrowers During COVID-19</a>
+                </li>
+                <li>
+                    <a href="https://www.consumerfinance.gov/data-research/research-reports/" target="_blank">Consumer Use of Buy Now, Pay Later</a>
+                </li>
+                <li>
+                    <a href="https://www.consumerfinance.gov/data-research/research-reports/" target="_blank">Making Ends Meet in 2022</a>
+                </li>
+                <li>
+                    <a href="https://www.consumerfinance.gov/data-research/research-reports/" target="_blank">HMDA Voluntary Review</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="work-item">
+            <h3>Code & AI</h3>
+            <p><a href="https://github.com/g-codes4good" target="_blank">GitHub →</a></p>
+            <p>Master's practicum: explored LLM-assisted code translation and prompt evaluation methods.</p>
+            <p style="color: #999; font-size: 0.85rem; font-style: italic;">[PLACEHOLDER: Link to or describe specific projects. What problem were you solving? What did you build? What did you learn about evaluation/bias/tradeoffs that shapes how you think about AI now?]</p>
+        </div>
+    </section>
+
+    <section id="thinking" class="work" style="margin-top: 5rem; margin-bottom: 5rem;">
+        <h2>Thinking & Writing</h2>
+        <p style="color: #666; font-size: 1rem; margin-bottom: 2.5rem;">Thoughts on data, systems, and what happens when they encounter people.</p>
+
+        <div style="background: white; padding: 2.5rem; border: 1px solid #f0f0f0; margin-bottom: 2rem;">
+            <p style="color: #999; font-size: 0.95rem; font-style: italic;">[PLACEHOLDER: Add 2-3 blog posts, essays, or case studies. Examples: "Why fair lending analysis fails without understanding borrower context" or "What I learned about evaluation from 5 design thinking workshops" or "How to talk about bias in financial systems without making people defensive"]</p>
+        </div>
+    </section>
+
+    <section id="experience" class="other-section">
+        <h2>Experience</h2>
+
+        <div class="experience-grid">
+            <div class="experience-item">
+                <h3>Compliance & Regulatory Analytics</h3>
+                <p>Five years examining financial institutions. Understand how to read systems, find where they fail, and communicate that clearly.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Operations & Communications</h3>
+                <p>Built systems that work. CRM infrastructure, dashboards, campaigns, relationships with teams across government and nonprofits.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Facilitation</h3>
+                <p>Taught design thinking workshops. Good at helping groups identify real problems and think about solutions together.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>AI & Research</h3>
+                <p>M.S. Analytics candidate (graduating Dec 2025). Currently interested in AI governance—specifically how to evaluate systems when tradeoffs matter and people are affected.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="toolkit" class="other-section" style="margin-top: 5rem; margin-bottom: 5rem;">
+        <h2>Technical Toolkit</h2>
+        <div style="background: white; padding: 2.5rem; border: 1px solid #f0f0f0;">
+            <p style="color: #999; font-size: 0.9rem; font-style: italic;">[PLACEHOLDER: List technical skills with examples of where you used them. E.g., "Python (MATLAB-to-Python translation, data cleaning) / SQL (15M+ record analyses) / Tableau (dashboard building for operations team) / R (fair lending statistical analysis)"]</p>
+        </div>
+    </section>
+
+    <section id="about" class="other-section">
+        <h2>About</h2>
+        <p>I'm interested in how systems actually work versus how they're supposed to work. I take time to understand a problem deeply, follow the data, and explain what I find. That applies whether I'm analyzing mortgage disparities, designing a nonprofit annual report, or facilitating a workshop where a room full of people tries to solve a problem they identified.</p>
+        <p>Looking for roles in strategy, data science, operations, or AI safety. Places where you need someone who can read a policy, understand the data, and ask what happens to the people the policy affects.</p>
+        <p style="margin-top: 2rem; color: #999; font-size: 0.85rem; font-style: italic;">[PLACEHOLDER: Add education details — M.S. Analytics (Georgia Tech, Dec 2025), capstone/thesis topic, key coursework in ethics/evaluation/fairness if relevant]</p>
+    </section>
+
+    <footer id="contact">
+        <h3>Get in touch</h3>
+        <div class="contact-links">
+            <a href="mailto:greta.li.hello@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/greta-li" target="_blank">LinkedIn</a>
+            <a href="https://github.com/g-codes4good" target="_blank">GitHub</a>
+        </div>
+    </footer>
+
+</body>
+</html>

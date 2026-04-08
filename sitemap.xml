@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://greta-li.pages.dev/</loc>
+        <lastmod>2026-04-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://greta-li.pages.dev/index.html</loc>
+        <lastmod>2026-04-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://greta-li.pages.dev/#about</loc>
+        <lastmod>2026-04-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://greta-li.pages.dev/#publications</loc>
+        <lastmod>2026-04-07</lastmod>
+        <changefreq>quarterly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://greta-li.pages.dev/#cv</loc>
+        <lastmod>2026-04-07</lastmod>
+        <changefreq>quarterly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset>
