@@ -7,6 +7,7 @@ Sitemap: https://greta-li.pages.dev/sitemap.xml
 # Allow crawling of all content
 Allow: /
 Allow: /assets/
+Allow: /embedded-files/
 
 # Disallow development-related files
 Disallow: /server.py
