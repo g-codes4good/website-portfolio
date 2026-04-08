@@ -1563,6 +1563,11 @@
         // Run check when page loads
         window.addEventListener('load', checkPDFSupport);
 
+        // Prevent browser scroll restoration
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+        }
+
         // SECTION SWITCHING
         function switchSection(sectionId) {
             // Hide all sections
@@ -1581,11 +1586,18 @@
             // Add active class to clicked nav link
             event.target.classList.add('active');
 
-            // Scroll to top
+            // Scroll to top for all pages
             window.scrollTo(0, 0);
-            // Ensure home page is at the very top
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+
+            // Extra scroll for home page with delay to ensure it sticks
             if (sectionId === 'home') {
-                document.documentElement.scrollTop = 0;
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                    document.documentElement.scrollTop = 0;
+                    document.body.scrollTop = 0;
+                }, 0);
             }
         }
     </script>
