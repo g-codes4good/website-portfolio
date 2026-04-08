@@ -1104,10 +1104,47 @@
                 display: block;
                 padding: var(--spacing-md) var(--spacing-lg);
                 border-bottom: 1px solid var(--color-border);
+                position: static;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .mobile-header-title {
+                border-bottom: none;
+                margin-bottom: var(--spacing-sm);
+                padding: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: block !important;
+                position: static;
+                background: transparent;
+                border: none;
+                padding: 0;
+                margin-top: var(--spacing-sm);
+            }
+
+            .mobile-nav ul {
+                flex-direction: row;
+                gap: var(--spacing-sm);
+                flex-wrap: wrap;
+            }
+
+            .mobile-nav a {
+                display: inline;
+                padding: 0;
+                font-size: var(--font-size-sm);
             }
 
             .mobile-social {
-                display: none;
+                display: flex;
+                margin-top: var(--spacing-sm);
+                border-top: 1px solid var(--color-border);
+                padding-top: var(--spacing-sm);
             }
 
             /* HIDE DESKTOP SIDEBAR */
@@ -1122,8 +1159,11 @@
             }
 
             .hero-section {
-                min-height: auto;
+                min-height: 100vh;
                 padding: var(--spacing-xl) 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
 
             .profile-section {
@@ -1158,7 +1198,7 @@
             .two-column-intro {
                 grid-template-columns: 1fr;
                 gap: var(--spacing-lg);
-                padding-top: 8vh;
+                padding-top: var(--spacing-2xl);
                 padding-bottom: 2vh;
             }
 
@@ -1233,7 +1273,7 @@
             }
 
             .scroll-indicator {
-                display: none;
+                display: block;
             }
 
 
